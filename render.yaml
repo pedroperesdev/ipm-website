@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: flask-portfolio
-    env: python
-    workingDir: backend
-    buildCommand: "pip install -r backend/requirements.txt"
-    startCommand: "gunicorn -w 3 -b 0.0.0.0:10000 app:app"
-    autoDeploy: true
