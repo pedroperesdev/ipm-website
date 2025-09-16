@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  
+
+  
+  <style>
+  </style>
+  <meta charset="UTF-8">
+  <title>IPM</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class = "banner">
+
+    <img src="static/image2.png" alt="Computer" />
+    <h1 id="title_text">IPM <br> 2025/26</h1>
+  </div>
+
+  <nav id="bottomNav">
+    <a href="#about us">About us</a>
+    <a href="#assignments">Assignments</a>
+    <a href="#project">Project</a>
+  </nav>
+
+  <h2 id="about us">About us</h2>
+  <h3>Computer Science students from FCT NOVA [...]</h3>
+
+  <div>
+    <h2 id="assignments">Assignments</h2>
+    <div id="1" class="card">
+      <img src="static/image1.png" alt="Portfolio" />
+      <div class="overlay">
+        <h3>Assignment 1</h3>
+        <p>Good and bad design</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="project">Project</h2>
+    <h3>-------------</h3>
+  </div>
+
+  <!-- Popups -->
+  <div id="popupBackground1" class="popup-background">
+    <div id="popup1" class="popup">
+      <span style="color: red;" id="close1" class="close">X</span>
+      <h3>Assignment1</h3>
+      <p>Trabalhos:</p>
+      <p>Pedro Peres</p>
+      <p>...</p>
+      <p>...</p>
+      <p>...</p>
+    </div>
+  </div>
+
+  <script>
+    /* Open popups via card clicks */
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.id; // get id of clicked card
+        document.getElementById(`popupBackground${id}`).style.display = 'flex';
+      });
+    });
+
+    /* Close popups via [X] clicks */
+    document.querySelectorAll('.close').forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        const num = closeBtn.id.replace('close', '');
+        document.getElementById(`popupBackground${num}`).style.display = 'none';
+      });
+    });
+
+    const nav = document.getElementById('bottomNav');
+
+    let navOffsetTop;
+
+    function updateNavOffset() {
+      navOffsetTop = nav.getBoundingClientRect().top + window.scrollY;
+    }
+
+    window.addEventListener('load', updateNavOffset);
+    window.addEventListener('resize', updateNavOffset);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= navOffsetTop) {
+        nav.classList.add('sticky');
+      } else {
+        nav.classList.remove('sticky');
+      }
+    });
+
+    const textElem = document.getElementById('title_text')
+    const textContent = textElem.textContent;
+    const speed = 150; // milliseconds per character
+    let i = 0;
+    textElem.textContent = "";
+
+    function typeWriter() {
+      if (i < textContent.length) {
+        textElem.textContent = textElem.textContent.replace(/\|$/, ""); //matches real pipe char
+        textElem.textContent += textContent.charAt(i) + "|";
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+      else {
+         textElem.textContent = textElem.textContent.replace(/\|$/, "");
+      }
+    }
+
+    window.onload = typeWriter;
+
+  </script>
+</body>
+</html>
