@@ -213,3 +213,9 @@ nav a {
   transform: none;
 }
 
+#popup1 p, 
+#popup1 h3, 
+#popup1 a {
+    font-size: 12px;   /* podes ajustar, por ex. 10px, 11px, 14px */
+}
+
